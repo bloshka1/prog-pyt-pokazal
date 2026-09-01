@@ -1,0 +1,56 @@
+# АЛГОРИТМ ДЕЙКСТРЫ
+def dijkstra(graph, start):
+    # Инициализация: все расстояния = бесконечность
+    distances = {vertex: float('infinity') for vertex in graph}
+    distances[start] = 0  # Расстояние до старта = 0
+    visited = set()  # Посещённые вершины
+    previous = {vertex: None for vertex in graph}  # Для восстановления пути
+    while len(visited) < len(graph):
+        # Поиск непосещённой вершины с минимальным расстоянием
+        current_vertex = None
+        min_distance = float('infinity')    
+        for vertex in graph:
+            if vertex not in visited and distances[vertex] < min_distance:
+                min_distance = distances[vertex]
+                current_vertex = vertex  
+        # Если вершина не найдена - граф несвязный
+        if current_vertex is None:
+            break
+        
+        visited.add(current_vertex)
+        
+        # Релаксация рёбер
+        for neighbor, weight in graph[current_vertex].items():
+            distance = distances[current_vertex] + weight
+            if distance < distances[neighbor]:
+                distances[neighbor] = distance
+                previous[neighbor] = current_vertex
+    
+    return distances, previous
+
+
+def get_path(previous, start, end):
+    # Восстановление пути от start до end
+    path = []
+    current = end
+    
+    while current is not None:
+        path.append(current)
+        current = previous[current]
+    
+    path.reverse()
+    return path if path[0] == start else []
+
+
+# ГРАФ
+graph = {
+    'A': {'B': 1, 'C': 4},
+    'B': {'A': 1, 'C': 2, 'D': 5},
+    'C': {'A': 4, 'B': 2, 'D': 1},
+    'D': {'B': 5, 'C': 1}
+}
+
+# ЗАПУСК
+distances, previous = dijkstra(graph, 'A')
+print(distances)
+print(get_path(previous, 'A', 'D'))
