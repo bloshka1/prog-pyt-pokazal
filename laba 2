@@ -1,0 +1,28 @@
+def minn(a):
+    return min(a)  # Встроенная функция Python
+def maxx(a):
+    return max(a)  # Встроенная функция Python
+def summ(a):
+    c = 0
+    for num in a:        # Перебираем числа
+        if num == 0:     # Встретили 0 → стоп
+            break
+        c += num         # Складываем
+    return c
+def prodd(a):
+    c = 1
+    for num in a:
+        if num == 1:     # Встретили 1 → стоп
+            break
+        c *= num         # Умножаем
+    return c
+def usl(a):
+    b = '>'              # Условие: больше
+    q = []
+    if b == '<':
+        q = [i for i in a if i < 3]  # Оставляет числа < 3
+    if b == '>':
+        q = [i for i in a if i > 3]  # Оставляет числа > 3
+    return q
+a = [1, 2, 5, 1, 3, 7, 8, 9]
+print(minn(a), maxx(a), summ(a), prodd(a), usl(a))
