@@ -1,0 +1,19 @@
+name = ['A', 'b', 'c', 'd']           # 4 имени
+predmet = ['Англ', 'рус', 'Математика'] # 3 предмета
+ocenka = ['5', '4', '3', '2']          # 4 оценки
+data = ['3.03', '4.04', '5.05']        # 3 даты
+filter_predmet = {'Математика', 'Англ'}  # Только эти предметы
+filter_data = {'3.03', '5.05'}           # Только эти даты
+used_ocenka = set()  # Хранилище использованных оценок
+
+for a in name:              # Перебираем имена
+    for b in predmet:       # Перебираем предметы
+        for c in data:      # Перебираем даты
+            if b in filter_predmet and c in filter_data:  # Фильтр
+                o = ''
+                for d in ocenka:           # Ищем свободную оценку
+                    if d not in used_ocenka:
+                        o = d
+                        used_ocenka.add(d)  # Помечаем как использованную
+                        break
+                print(a, b, c, o)           # Выводим
