@@ -1,0 +1,22 @@
+def r_s(arr, ind, rr):
+    if ind == len(arr):        # Дошли до конца?
+        return rr              # Возвращаем накопленную сумму
+    rr1 = arr[ind] + rr        # Добавляем текущий элемент
+    return r_s(arr, ind + 1, rr1)  # Переходим к следующему
+def rm_s(arr, ind, rr):
+    if ind == len(arr):        # Дошли до конца?
+        return rr              # Возвращаем минимум
+    if arr[ind] < rr:          # Текущий элемент меньше?
+        rr = arr[ind]          # Обновляем минимум
+    return rm_s(arr, ind + 1, rr)  # К следующему
+def rma_s(arr, ind, rr):
+    if ind == len(arr):        # Дошли до конца?
+        return rr              # Возвращаем максимум
+    if arr[ind] > rr:          # Текущий элемент больше?
+        rr = arr[ind]          # Обновляем максимум
+    return rma_s(arr, ind + 1, rr)  # К следующему
+arr1 = [1, 2, 3, 4, 56]
+res1 = r_s(arr1, 0, 0)          # Сумма → 66
+res2 = rm_s(arr1, 0, arr1[0])   # Минимум → 1
+res3 = rma_s(arr1, 0, arr1[0])  # Максимум → 56
+print(res1, res2, res3)
